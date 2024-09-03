@@ -1,0 +1,27 @@
+services:
+  neo4j:
+    container_name: neo4j_sf1
+    image: neo4j:latest
+    ports:
+      - 7474:7474
+      - 7689:7689
+    environment:
+      - NEO4J_server_memory_heap_initial__size=6G
+      - NEO4J_server_memory_heap_max__size=6G
+      - NEO4J_dbms_security_auth__enabled=false
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_PLUGINS=["apoc", "graph-data-science"]
+    volumes:
+      - ./import:/var/lib/neo4j/import
+      - ./scripts:/var/lib/neo4j/scripts
+    command: >
+      bash -c "
+      neo4j-admin set-initial-password password &&
+      neo4j start && 
+      until cypher-shell -u neo4j -p password --format plain < /var/lib/neo4j/scripts/init.cypher; do
+        echo 'Waiting for Neo4j to be ready...';
+        sleep 5;
+      done;
+      neo4j console"
