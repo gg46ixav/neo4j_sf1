@@ -16,15 +16,3 @@ services:
     volumes:
       - ./import:/var/lib/neo4j/import
       - ./scripts:/var/lib/neo4j/scripts
-    command: >
-      bash -c "
-      neo4j start &&
-      echo 'Waiting for Neo4j to be ready...' &&
-      until cypher-shell --format plain 'RETURN 1' > /dev/null 2>&1; do
-        echo 'Waiting...';
-        sleep 5;
-      done;
-      echo 'Neo4j is ready. Starting data import...' &&
-      cypher-shell --format plain < /var/lib/neo4j/scripts/init.cypher &&
-      echo 'Data import completed.' &&
-      neo4j console"
