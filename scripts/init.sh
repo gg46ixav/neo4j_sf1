@@ -1,2 +1,2 @@
 #!/bin/bash
-cypher-shell --format plain < /var/lib/neo4j/scripts/init.cypher
+cypher-shell -a bolt://localhost:7689 --format plain < /var/lib/neo4j/scripts/init.cypher
