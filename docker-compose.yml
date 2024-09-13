@@ -1,6 +1,6 @@
 services:
   neo4j:
-    container_name: neo4j_finbench
+    container_name: neo4j_finbench_sf10
     image: neo4j:latest
     ports:
       - 7474:7474
