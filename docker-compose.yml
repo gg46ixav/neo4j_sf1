@@ -6,8 +6,8 @@ services:
       - 7474:7474
       - 7689:7689
     environment:
-      - NEO4J_server_memory_heap_initial__size=6G
-      - NEO4J_server_memory_heap_max__size=6G
+      - NEO4J_server_memory_heap_initial__size=16G
+      - NEO4J_server_memory_heap_max__size=16G
       - NEO4J_server_bolt_listen__address=:7689
       - NEO4J_dbms_security_auth__enabled=false
       - NEO4J_apoc_export_file_enabled=true
